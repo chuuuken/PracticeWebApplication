@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>週間スケジュール</title>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+
+  <header>
+    <h1>週間スケジュール</h1>
+
+    <div id="week-controls">
+      <button id="btnPrevWeek">1週前</button>
+      <button id="btnPrevDay">1日前</button>
+      <button id="btnThisWeek">今週</button>
+      <button id="btnNextDay">1日後</button>
+      <button id="btnNextWeek">1週先</button>
+    </div>
+  </header>
+
+  <main id="weekly-view">
+
+    <div class="day-column" data-day="0">
+      <h2>
+        <span class="dow">Sun</span><br>
+        <span class="date"></span>
+      </h2>
+      <div class="events"></div>
+    </div>
+
+    <div class="day-column" data-day="1">
+      <h2>
+        <span class="dow">Mon</span><br>
+        <span class="date"></span>
+      </h2>
+      <div class="events"></div>
+    </div>
+
+    <div class="day-column" data-day="2">
+      <h2>
+        <span class="dow">Tue</span><br>
+        <span class="date"></span>
+      </h2>
+      <div class="events"></div>
+    </div>
+
+    <div class="day-column" data-day="3">
+      <h2>
+        <span class="dow">Wed</span><br>
+        <span class="date"></span>
+      </h2>
+      <div class="events"></div>
+    </div>
+
+    <div class="day-column" data-day="4">
+      <h2>
+        <span class="dow">Thu</span><br>
+        <span class="date"></span>
+      </h2>
+      <div class="events"></div>
+    </div>
+
+    <div class="day-column" data-day="5">
+      <h2>
+        <span class="dow">Fri</span><br>
+        <span class="date"></span>
+      </h2>
+      <div class="events"></div>
+    </div>
+
+    <div class="day-column" data-day="6">
+      <h2>
+        <span class="dow">Sat</span><br>
+        <span class="date"></span>
+      </h2>
+      <div class="events"></div>
+    </div>
+
+  </main>
+
+  <script src="/js/index.js"></script>
+</body>
+</html>

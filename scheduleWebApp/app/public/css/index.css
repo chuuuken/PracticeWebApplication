@@ -1,0 +1,35 @@
+#weekly-view {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  height: 100vh;
+}
+
+.day-column {
+  border-right: 1px solid #ddd;
+  padding: 8px;
+  overflow-y: auto;
+}
+
+.day-column h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.event-chip {
+  background: #555;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.chip-title {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.chip-time {
+  font-size: 12px;
+  opacity: 0.9;
+}
