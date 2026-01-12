@@ -39,6 +39,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     rebuildSelectBoxes();
   });
 
+  createdBySelect.addEventListener("change", rebuildSelectBoxes);
+
   // 色一覧
   await loadColors(colorSelect);
 });

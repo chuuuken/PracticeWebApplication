@@ -73,4 +73,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     participantsSelect.value = "";
     rebuildSelectBoxes();
   });
+
+  createdBySelect.addEventListener("change", rebuildSelectBoxes);
 });
