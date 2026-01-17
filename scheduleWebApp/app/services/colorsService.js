@@ -1,4 +1,4 @@
-const connection = require('../config/db');
+const db = require('../config/db');
 
 // ===============================
 // 一覧取得
@@ -6,12 +6,11 @@ const connection = require('../config/db');
 exports.getAll = () => {
   return new Promise((resolve, reject) => {
     const sql = `SELECT * FROM colors ORDER BY color_id`;
-    connection.query(sql, (err, rows) => {
+    db.query(sql, (err, results) => {
       if (err) {
-        reject(err);
-      } else {
-        resolve(rows);
+        return reject(err);
       }
+      resolve(results);
     });
   });
 };
@@ -22,12 +21,11 @@ exports.getAll = () => {
 exports.getDetail = (id) => {
   return new Promise((resolve, reject) => {
     const sql = `SELECT * FROM colors WHERE color_id = ?`;
-    connection.query(sql, [id], (err, rows) => {
+    db.query(sql, [id], (err, results) => {
       if (err) {
-        reject(err);
-      } else {
-        resolve(rows[0]);
+        return reject(err);
       }
+      resolve(results[0] || null);
     });
   });
 };
@@ -35,21 +33,18 @@ exports.getDetail = (id) => {
 // ===============================
 // 新規登録
 // ===============================
-exports.create = (body) => {
+exports.create = ({ color_name, color_code }) => {
   return new Promise((resolve, reject) => {
-    const { color_name, color_code } = body;
-
     const sql = `
       INSERT INTO colors (color_name, color_code)
       VALUES (?, ?)
     `;
 
-    connection.query(sql, [color_name, color_code], (err) => {
+    db.query(sql, [color_name, color_code], (err, result) => {
       if (err) {
-        reject(err);
-      } else {
-        resolve();
+        return reject(err);
       }
+      resolve(result.insertId);
     });
   });
 };
@@ -60,12 +55,11 @@ exports.create = (body) => {
 exports.remove = (id) => {
   return new Promise((resolve, reject) => {
     const sql = `DELETE FROM colors WHERE color_id = ?`;
-    connection.query(sql, [id], (err) => {
+    db.query(sql, [id], (err, result) => {
       if (err) {
-        reject(err);
-      } else {
-        resolve();
+        return reject(err);
       }
+      resolve(result.affectedRows);
     });
   });
 };

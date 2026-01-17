@@ -1,4 +1,4 @@
-const connection = require('../config/db');
+const db = require('../config/db');
 
 // ===============================
 // 一覧取得
@@ -6,12 +6,11 @@ const connection = require('../config/db');
 exports.getAll = () => {
   return new Promise((resolve, reject) => {
     const sql = `SELECT * FROM users ORDER BY user_id`;
-    connection.query(sql, (err, rows) => {
+    db.query(sql, (err, rows) => {
       if (err) {
-        reject(err);
-      } else {
-        resolve(rows);
+        return reject(err);
       }
+      resolve(results);
     });
   });
 };
@@ -22,12 +21,11 @@ exports.getAll = () => {
 exports.getDetail = (id) => {
   return new Promise((resolve, reject) => {
     const sql = `SELECT * FROM users WHERE user_id = ?`;
-    connection.query(sql, [id], (err, rows) => {
+    db.query(sql, [id], (err, rows) => {
       if (err) {
-        reject(err);
-      } else {
-        resolve(rows[0]);
+        return reject(err);
       }
+      resolve(results);
     });
   });
 };
@@ -44,12 +42,11 @@ exports.create = (body) => {
       VALUES (?, ?, ?, ?)
     `;
 
-    connection.query(sql, [user_id, name, email, role], (err) => {
+    db.query(sql, [user_id, name, email, role], (err) => {
       if (err) {
-        reject(err);
-      } else {
-        resolve();
+        return reject(err);
       }
+      resolve(results);
     });
   });
 };
@@ -60,12 +57,11 @@ exports.create = (body) => {
 exports.remove = (id) => {
   return new Promise((resolve, reject) => {
     const sql = `DELETE FROM users WHERE user_id = ?`;
-    connection.query(sql, [id], (err) => {
+    db.query(sql, [id], (err) => {
       if (err) {
-        reject(err);
-      } else {
-        resolve();
+        return reject(err);
       }
+      resolve(results);
     });
   });
 };

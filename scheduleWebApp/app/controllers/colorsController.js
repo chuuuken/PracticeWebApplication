@@ -1,73 +1,41 @@
-const db = require("../config/db");
+const colorsService = require("../services/colorsService");
 
-// ===============================
-// 全件取得
-// ===============================
-exports.getAll = () => {
-  return new Promise((resolve, reject) => {
-    db.query(
-      "SELECT color_id, color_name, color_code FROM colors ORDER BY color_id",
-      (err, results) => {
-        if (err) {
-          return reject(err);
-        }
-        resolve(results);
-      }
-    );
-  });
+exports.getAll = async (req, res) => {
+  try {
+    const colors = await colorsService.getAll();
+    res.json(colors);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch colors" });
+  }
 };
 
-// ===============================
-// 詳細取得
-// ===============================
-exports.getDetail = (colorId) => {
-  return new Promise((resolve, reject) => {
-    db.query(
-      "SELECT color_id, color_name, color_code FROM colors WHERE color_id = ?",
-      [colorId],
-      (err, results) => {
-        if (err) {
-          return reject(err);
-        }
-        resolve(results[0] || null);
-      }
-    );
-  });
+exports.getDetail = async (req, res) => {
+  try {
+    const color = await colorsService.getDetail(req.params.id);
+    res.json(color);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch color detail" });
+  }
 };
 
-// ===============================
-// 新規登録
-// ===============================
-exports.create = ({ color_name, color_code }) => {
-  return new Promise((resolve, reject) => {
-    db.query(
-      `INSERT INTO colors (color_name, color_code)
-       VALUES (?, ?)`,
-      [color_name, color_code],
-      (err, result) => {
-        if (err) {
-          return reject(err);
-        }
-        resolve(result.insertId);
-      }
-    );
-  });
+exports.create = async (req, res) => {
+  try {
+    const id = await colorsService.create(req.body);
+    res.json({ id });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to create color" });
+  }
 };
 
-// ===============================
-// 削除
-// ===============================
-exports.remove = (colorId) => {
-  return new Promise((resolve, reject) => {
-    db.query(
-      "DELETE FROM colors WHERE color_id = ?",
-      [colorId],
-      (err, result) => {
-        if (err) {
-          return reject(err);
-        }
-        resolve(result.affectedRows);
-      }
-    );
-  });
+exports.remove = async (req, res) => {
+  try {
+    await colorsService.remove(req.params.id);
+    res.json({ message: "deleted" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to delete color" });
+  }
 };

@@ -52,12 +52,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   const users = await fetchUsers();
   const rebuildSelectBoxes = () =>
     rebuildSelectBoxesBase(users, createdBySelect, participantsSelect, chipContainer);
-
+  
   /* ===============================
      色一覧
   =============================== */
-  await loadColors(colorSelect);
-
+  //await loadColors(colorSelect);
+  
   /* ===============================
      スケジュール詳細取得
   =============================== */
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   location.value = sch.location || "";
   memo.value = sch.memo || "";
   colorSelect.value = sch.color_name;
-
+  
   /* ===============================
      時刻セット
   =============================== */
