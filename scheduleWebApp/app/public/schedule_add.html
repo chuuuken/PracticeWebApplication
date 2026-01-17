@@ -5,70 +5,74 @@
   <title>スケジュール登録</title>
   <link rel="stylesheet" href="/css/schedule_add.css">
 </head>
+
 <body>
 
-  <h1>スケジュール登録</h1>
+  <div class="container">
+    <h1>スケジュール登録</h1>
 
-  <form action="/schedules" method="POST" id="scheduleForm">
+    <form id="addForm" method="POST" action="/schedules">
 
-    <div class="form-group">
-      <label>登録者</label>
-      <select name="created_by" id="createdBySelect" required>
-        <option value="">選択してください</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>同報者</label>
-      <select id="participantsSelect">
-        <option value="">選択してください</option>
-      </select>
-      <div id="chipContainer"></div>
-    </div>
-
-    <div class="form-group">
-      <label>タイトル</label>
-      <input type="text" name="title" required>
-    </div>
-
-    <div class="form-group">
-      <label>日付</label>
-      <input type="date" name="date" required>
-    </div>
-
-    <div class="form-group">
-      <label>開始時刻</label>
-      <div class="time-select">
-        <select id="startHour" name="start_hour" required></select> 時
-        <select id="startMinute" name="start_minute" required></select> 分
+      <div class="form-group">
+        <label>登録者</label>
+        <select id="createdBySelect" name="created_by"></select>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label>終了時刻</label>
-      <div class="time-select">
-        <select id="endHour" name="end_hour"></select> 時
-        <select id="endMinute" name="end_minute"></select> 分
+      <div class="form-group">
+        <label>同報者</label>
+        <select id="participantsSelect"></select>
+        <div id="chipContainer"></div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label>場所</label>
-      <input type="text" name="location">
-    </div>
+      <div class="form-group">
+        <label>タイトル</label>
+        <input type="text" id="title" name="title">
+      </div>
 
-    <div class="form-group">
-      <label>メモ</label>
-      <textarea name="memo" rows="4"></textarea>
-    </div>
+      <div class="form-group">
+        <label>予定日</label>
+        <input type="date" id="date" name="date">
+      </div>
 
-    <div class="form-group">
-      <label>色</label>
-      <select name="color_name" id="colorSelect"></select>
-    </div>
+      <div class="form-group">
+        <label>開始時刻</label>
+        <div class="time-row">
+          <select id="startHour" name="startHour"></select>
+          <span>:</span>
+          <select id="startMinute" name="startMinute"></select>
+        </div>
+      </div>
 
-    <button type="submit">登録</button>
-  </form>
+      <div class="form-group">
+        <label>終了時刻</label>
+        <div class="time-row">
+          <select id="endHour" name="endHour"></select>
+          <span>:</span>
+          <select id="endMinute" name="endMinute"></select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>場所</label>
+        <input type="text" id="location" name="location">
+      </div>
+
+      <div class="form-group">
+        <label>メモ</label>
+        <textarea id="memo" name="memo"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>色</label>
+        <select id="colorSelect" name="color_name"></select>
+      </div>
+
+      <div class="btn-area">
+        <button type="submit">登録する</button>
+      </div>
+
+    </form>
+  </div>
 
   <script type="module" src="/js/schedule_add.js"></script>
 </body>

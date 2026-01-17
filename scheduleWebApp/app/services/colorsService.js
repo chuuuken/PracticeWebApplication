@@ -7,8 +7,11 @@ exports.getAll = () => {
   return new Promise((resolve, reject) => {
     const sql = `SELECT * FROM colors ORDER BY color_id`;
     connection.query(sql, (err, rows) => {
-      if (err) reject(err);
-      else resolve(rows);
+      if (err) {
+        reject(err);
+      } else {
+        resolve(rows);
+      }
     });
   });
 };
@@ -20,8 +23,11 @@ exports.getDetail = (id) => {
   return new Promise((resolve, reject) => {
     const sql = `SELECT * FROM colors WHERE color_id = ?`;
     connection.query(sql, [id], (err, rows) => {
-      if (err) reject(err);
-      else resolve(rows[0]);
+      if (err) {
+        reject(err);
+      } else {
+        resolve(rows[0]);
+      }
     });
   });
 };
@@ -39,8 +45,11 @@ exports.create = (body) => {
     `;
 
     connection.query(sql, [color_name, color_code], (err) => {
-      if (err) reject(err);
-      else resolve();
+      if (err) {
+        reject(err);
+      } else {
+        resolve();
+      }
     });
   });
 };
@@ -52,8 +61,11 @@ exports.remove = (id) => {
   return new Promise((resolve, reject) => {
     const sql = `DELETE FROM colors WHERE color_id = ?`;
     connection.query(sql, [id], (err) => {
-      if (err) reject(err);
-      else resolve();
+      if (err) {
+        reject(err);
+      } else {
+        resolve();
+      }
     });
   });
 };

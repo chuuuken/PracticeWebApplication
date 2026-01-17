@@ -8,7 +8,9 @@ exports.getAll = () => {
     db.query(
       "SELECT color_id, color_name, color_code FROM colors ORDER BY color_id",
       (err, results) => {
-        if (err) return reject(err);
+        if (err) {
+          return reject(err);
+        }
         resolve(results);
       }
     );
@@ -24,7 +26,9 @@ exports.getDetail = (colorId) => {
       "SELECT color_id, color_name, color_code FROM colors WHERE color_id = ?",
       [colorId],
       (err, results) => {
-        if (err) return reject(err);
+        if (err) {
+          return reject(err);
+        }
         resolve(results[0] || null);
       }
     );
@@ -41,7 +45,9 @@ exports.create = ({ color_name, color_code }) => {
        VALUES (?, ?)`,
       [color_name, color_code],
       (err, result) => {
-        if (err) return reject(err);
+        if (err) {
+          return reject(err);
+        }
         resolve(result.insertId);
       }
     );
@@ -57,7 +63,9 @@ exports.remove = (colorId) => {
       "DELETE FROM colors WHERE color_id = ?",
       [colorId],
       (err, result) => {
-        if (err) return reject(err);
+        if (err) {
+          return reject(err);
+        }
         resolve(result.affectedRows);
       }
     );

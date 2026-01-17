@@ -22,7 +22,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
 
   document.getElementById("deleteBtn").onclick = async () => {
-    if (!confirm("削除しますか？")) return;
+    if (!confirm("削除しますか？")) {
+      return;
+    }
 
     await fetch(`/schedules/${scheduleId}`, { method: "DELETE" });
     location.href = "/";

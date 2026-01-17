@@ -1,35 +1,99 @@
-#weekly-view {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  height: 100vh;
+/* ===============================
+   全体レイアウト
+================================ */
+body {
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f5f7fa;
 }
 
-.day-column {
-  border-right: 1px solid #ddd;
+header {
+  padding: 20px;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+h1 {
+  margin: 0 0 10px 0;
+}
+
+#week-controls button {
+  margin-right: 8px;
+  padding: 6px 12px;
+}
+
+/* ===============================
+   メイン領域（横スクロール対応）
+================================ */
+main {
+  padding: 20px;
+  overflow-x: auto; /* 横スクロール可能にする */
+}
+
+/* ===============================
+   テーブル全体
+================================ */
+#schedule-table {
+  width: max-content; /* コンテンツ幅に合わせて広がる */
+  border-collapse: collapse;
+  background: #fff;
+}
+
+/* ===============================
+   ヘッダー（曜日行）を固定
+================================ */
+#schedule-table thead th {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 3;
+  border-bottom: 2px solid #ccc;
+}
+
+/* ===============================
+   セル
+================================ */
+#schedule-table th,
+#schedule-table td {
+  border: 1px solid #ddd;
   padding: 8px;
-  overflow-y: auto;
+  vertical-align: top;
+  min-width: 120px;
 }
 
-.day-column h2 {
-  text-align: center;
-  margin-bottom: 10px;
+/* メンバー名列 */
+.member-col {
+  width: 140px;
+  background: #fafafa;
+  font-weight: bold;
 }
 
+/* ===============================
+   チップ整列改善（レベル1）
+   → 各セル内のチップを上揃え＋余白統一
+================================ */
+#schedule-table td {
+  display: flex;
+  flex-direction: column;
+  gap: 6px; /* チップ間の余白を統一 */
+  justify-content: flex-start; /* 上揃え */
+}
+
+/* ===============================
+   スケジュールチップ（レベル2：カード風）
+================================ */
 .event-chip {
   background: #555;
-  padding: 8px 12px;
-  border-radius: 8px;
-  margin-bottom: 10px;
   color: #fff;
-  font-size: 14px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin: 0;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
-.chip-title {
-  font-weight: bold;
-  margin-bottom: 4px;
-}
-
-.chip-time {
-  font-size: 12px;
-  opacity: 0.9;
+.event-chip:hover {
+  opacity: 0.85;
 }

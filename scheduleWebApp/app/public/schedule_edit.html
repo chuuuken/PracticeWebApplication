@@ -5,68 +5,73 @@
   <title>スケジュール編集</title>
   <link rel="stylesheet" href="/css/schedule_edit.css">
 </head>
+
 <body>
 
   <h1>スケジュール編集</h1>
 
   <form id="editForm">
 
+    <!-- 登録者 -->
     <div class="form-group">
-      <label>登録者</label>
-      <select name="created_by" id="createdBySelect" required></select>
+      <label for="createdBySelect">登録者</label>
+      <select id="createdBySelect" name="created_by"></select>
     </div>
 
+    <!-- 同報者 -->
     <div class="form-group">
-      <label>同報者</label>
+      <label for="participantsSelect">同報者</label>
       <select id="participantsSelect">
         <option value="">選択してください</option>
       </select>
       <div id="chipContainer"></div>
     </div>
 
+    <!-- タイトル -->
     <div class="form-group">
-      <label>タイトル</label>
-      <input type="text" name="title" id="title" required>
+      <label for="title">タイトル</label>
+      <input type="text" id="title" name="title">
     </div>
 
+    <!-- 日付 -->
     <div class="form-group">
-      <label>日付</label>
-      <input type="date" name="date" id="date" required>
+      <label for="date">予定日</label>
+      <input type="date" id="date" name="date">
     </div>
 
-    <div class="form-group">
+    <!-- 開始時刻 -->
+    <div class="form-group time-select">
       <label>開始時刻</label>
-      <div class="time-select">
-        <select id="startHour" name="start_hour" required></select> 時
-        <select id="startMinute" name="start_minute" required></select> 分
-      </div>
+      <select id="startHour" name="startHour"></select>
+      <select id="startMinute" name="startMinute"></select>
     </div>
 
-    <div class="form-group">
+    <!-- 終了時刻 -->
+    <div class="form-group time-select">
       <label>終了時刻</label>
-      <div class="time-select">
-        <select id="endHour" name="end_hour"></select> 時
-        <select id="endMinute" name="end_minute"></select> 分
-      </div>
+      <select id="endHour" name="endHour"></select>
+      <select id="endMinute" name="endMinute"></select>
     </div>
 
+    <!-- 場所 -->
     <div class="form-group">
-      <label>場所</label>
-      <input type="text" name="location" id="location">
+      <label for="location">場所</label>
+      <input type="text" id="location" name="location">
     </div>
 
+    <!-- メモ -->
     <div class="form-group">
-      <label>メモ</label>
-      <textarea name="memo" id="memo" rows="4"></textarea>
+      <label for="memo">メモ</label>
+      <textarea id="memo" name="memo"></textarea>
     </div>
 
+    <!-- 色 -->
     <div class="form-group">
-      <label>色</label>
-      <select name="color_name" id="colorSelect"></select>
+      <label for="colorSelect">色</label>
+      <select id="colorSelect" name="color_name"></select>
     </div>
 
     <button type="submit">更新</button>
-    <button type="button" onclick="location.href='/'">戻る</button>
   </form>
 
   <script type="module" src="/js/schedule_edit.js"></script>

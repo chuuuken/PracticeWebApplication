@@ -6,7 +6,9 @@ const db = require("../config/db");
 exports.getAll = () => {
   return new Promise((resolve, reject) => {
     db.query("SELECT * FROM users ORDER BY user_id", (err, results) => {
-      if (err) return reject(err);
+      if (err) {
+        return reject(err);
+      }
       resolve(results);
     });
   });
@@ -21,7 +23,9 @@ exports.getDetail = (userId) => {
       "SELECT * FROM users WHERE user_id = ?",
       [userId],
       (err, results) => {
-        if (err) return reject(err);
+        if (err) {
+          return reject(err);
+        }
         resolve(results[0] || null);
       }
     );
@@ -38,7 +42,9 @@ exports.create = ({ user_id, name, email, role }) => {
        VALUES (?, ?, ?, ?)`,
       [user_id, name, email, role],
       (err, result) => {
-        if (err) return reject(err);
+        if (err) {
+          return reject(err);
+        }
         resolve(result.insertId);
       }
     );
@@ -54,7 +60,9 @@ exports.remove = (userId) => {
       "DELETE FROM users WHERE user_id = ?",
       [userId],
       (err, result) => {
-        if (err) return reject(err);
+        if (err) {
+          return reject(err);
+        }
         resolve(result.affectedRows);
       }
     );

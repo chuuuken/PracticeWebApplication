@@ -2,9 +2,18 @@ const schedulesService = require("../services/schedulesService");
 const path = require("path");
 
 /* ============================================================
+   participants[] を正規化
+============================================================ */
+function normalizeParticipants(p) {
+  if (!p) return [];
+  if (Array.isArray(p)) return p;
+  return [p]; // 単一選択時は string になるため
+}
+
+/* ============================================================
    一覧取得（週の範囲指定にも対応）
    GET /schedules?start=YYYY-MM-DD&end=YYYY-MM-DD
-   ============================================================ */
+============================================================ */
 exports.getAll = async (req, res) => {
   try {
     const { start, end } = req.query;
@@ -26,16 +35,20 @@ exports.getAll = async (req, res) => {
 /* ============================================================
    新規登録
    POST /schedules
-   ============================================================ */
+============================================================ */
 exports.create = async (req, res) => {
   try {
+    // participants[] を正規化
+    const participants = normalizeParticipants(req.body["participants[]"]);
+
+    // スケジュール登録
     const scheduleId = await schedulesService.create(req.body);
 
     // 参加者設定（登録者 + 同報者）
     await schedulesService.setParticipants(
       scheduleId,
       req.body.created_by,
-      req.body["participants[]"]
+      participants
     );
 
     res.redirect("/");
@@ -48,7 +61,7 @@ exports.create = async (req, res) => {
 /* ============================================================
    詳細ページ（HTML）
    GET /schedules/:id
-   ============================================================ */
+============================================================ */
 exports.getDetailPage = (req, res) => {
   res.sendFile(path.join(__dirname, "..", "public", "schedule_detail.html"));
 };
@@ -56,7 +69,7 @@ exports.getDetailPage = (req, res) => {
 /* ============================================================
    詳細 API（JSON）
    GET /schedules/:id/api
-   ============================================================ */
+============================================================ */
 exports.getDetailAPI = async (req, res) => {
   try {
     const schedule = await schedulesService.getDetail(req.params.id);
@@ -70,7 +83,7 @@ exports.getDetailAPI = async (req, res) => {
 /* ============================================================
    参加者 API
    GET /schedules/:id/users
-   ============================================================ */
+============================================================ */
 exports.getUsers = async (req, res) => {
   try {
     const users = await schedulesService.getUsers(req.params.id);
@@ -84,7 +97,7 @@ exports.getUsers = async (req, res) => {
 /* ============================================================
    編集ページ（HTML）
    GET /schedules/:id/edit
-   ============================================================ */
+============================================================ */
 exports.getEditPage = (req, res) => {
   res.sendFile(path.join(__dirname, "..", "public", "schedule_edit.html"));
 };
@@ -92,15 +105,20 @@ exports.getEditPage = (req, res) => {
 /* ============================================================
    更新
    PUT /schedules/:id
-   ============================================================ */
+============================================================ */
 exports.update = async (req, res) => {
   try {
+    // participants[] を正規化
+    const participants = normalizeParticipants(req.body["participants[]"]);
+
+    // スケジュール更新
     await schedulesService.update(req.params.id, req.body);
 
+    // 参加者更新
     await schedulesService.setParticipants(
       req.params.id,
       req.body.created_by,
-      req.body["participants[]"]
+      participants
     );
 
     res.json({ message: "updated" });
@@ -113,7 +131,7 @@ exports.update = async (req, res) => {
 /* ============================================================
    削除
    DELETE /schedules/:id
-   ============================================================ */
+============================================================ */
 exports.remove = async (req, res) => {
   try {
     await schedulesService.remove(req.params.id);
