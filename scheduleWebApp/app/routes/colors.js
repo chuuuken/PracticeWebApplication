@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const colorsController = require('../controllers/colorsController');
-//const multer = require('multer');
-//const upload = multer();
 
 // 一覧取得
 router.get('/', colorsController.getAll);

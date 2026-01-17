@@ -2,48 +2,44 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>ユーザー登録</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>ユーザ登録</title>
+  <link rel="stylesheet" href="/css/user_register.css">
 </head>
+
 <body>
-  <header>
-    <h1>ユーザー登録</h1>
-    <nav>
-      <a href="index.html">スケジュール表示</a> |
-      <a href="schedule_add.html">スケジュール登録</a> |
-      <a href="schedule_edit.html">スケジュール変更</a> |
-      <a href="holiday.html">祝日設定</a>
-    </nav>
-  </header>
 
-  <main>
-    <form action="/users" method="post" class="form-container">
+  <div class="container">
+    <h1>ユーザ登録</h1>
+
+    <form id="userForm">
+
       <div class="form-group">
-        <label for="user_id">ユーザID:</label>
-        <input type="text" id="user_id" name="user_id" maxlength="30" required>
+        <label for="user_id">ユーザID</label>
+        <input type="text" id="user_id" name="user_id" required>
       </div>
 
       <div class="form-group">
-        <label for="name">ユーザ名:</label>
-        <input type="text" id="name" name="name" maxlength="30" required>
+        <label for="name">ユーザ名</label>
+        <input type="text" id="name" name="name" required>
       </div>
 
       <div class="form-group">
-        <label for="email">メールアドレス:</label>
-        <input type="email" id="email" name="email" maxlength="100" required>
+        <label for="email">メールアドレス</label>
+        <input type="text" id="email" name="email">
       </div>
 
       <div class="form-group">
-        <label for="role">役職:</label>
-        <input type="text" id="role" name="role" maxlength="30" required>
+        <label for="role">役職</label>
+        <input type="text" id="role" name="role">
       </div>
 
-      <button type="submit">登録</button>
+      <div class="btn-area">
+        <button type="submit">登録</button>
+      </div>
+
     </form>
-  </main>
+  </div>
 
-  <footer>
-    <p>&copy; 2026 MyScheduleApp</p>
-  </footer>
+  <script src="/js/user_register.js"></script>
 </body>
 </html>
