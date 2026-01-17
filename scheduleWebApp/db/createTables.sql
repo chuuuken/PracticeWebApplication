@@ -1,5 +1,11 @@
--- ユーザ(users)テーブル
+-- テーブル削除
+DROP TABLE colors;
+DROP TABLE user_schedule;
+DROP TABLE schedules;
+DROP TABLE recurring_rules;
 DROP TABLE users;
+
+-- ユーザ(users)テーブル
 CREATE TABLE users (
   user_id   VARCHAR(50) PRIMARY KEY,
   name      VARCHAR(100) NOT NULL,
@@ -8,7 +14,6 @@ CREATE TABLE users (
 );
 
 -- 定期予約ルール(recurring_rules)テーブル
-DROP TABLE recurring_rules;
 CREATE TABLE recurring_rules (
   rule_id      INT AUTO_INCREMENT PRIMARY KEY,
   created_by   VARCHAR(50) NOT NULL,
@@ -26,7 +31,6 @@ CREATE TABLE recurring_rules (
 );
 
 -- スケジュール(schedules)テーブル
-DROP TABLE schedules;
 CREATE TABLE schedules (
   schedule_id       INT AUTO_INCREMENT PRIMARY KEY,
   title             VARCHAR(100) NOT NULL,
@@ -42,7 +46,6 @@ CREATE TABLE schedules (
 );
 
 -- ユーザスケジュール(user_schedule)テーブル
-DROP TABLE user_schedule;
 CREATE TABLE user_schedule (
   user_id     VARCHAR(50) NOT NULL,
   schedule_id INT NOT NULL,
@@ -52,7 +55,6 @@ CREATE TABLE user_schedule (
 );
 
 -- 色(color)テーブル
-DROP TABLE colors;
 CREATE TABLE colors (
   color_id     INT AUTO_INCREMENT PRIMARY KEY,
   color_name VARCHAR(30) NOT NULL UNIQUE,   -- 例: 赤, 青, 緑, オレンジ
